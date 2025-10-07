@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio Moderno - Fabrício Rosa</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #111827; /* Dark blue-gray */
+      color: #e5e7eb; /* Light gray */
+    }
+    .glass-effect {
+      background: rgba(17, 24, 39, 0.6); /* Darker semi-transparent */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .hero-gradient {
+      background: radial-gradient(circle at top left, #1f2937, #111827);
+    }
+    .card-bg {
+      background-color: #1f2937; /* Slightly lighter dark blue */
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .highlight-text {
+      color: #34d399; /* Emerald green */
+    }
+    .btn-primary {
+      background-color: #34d399;
+      color: #111827;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #6ee7b7;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(52, 211, 153, 0.25);
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background-color: #34d399;
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+    /* Custom animation for hero text */
+    .fade-in-up {
+        animation: fadeInUp 1s ease-out forwards;
+        opacity: 0;
+    }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .fade-in-up:nth-child(1) { animation-delay: 0.2s; }
+    .fade-in-up:nth-child(2) { animation-delay: 0.4s; }
+    .fade-in-up:nth-child(3) { animation-delay: 0.6s; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Header -->
+  <header id="header" class="glass-effect fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold highlight-text">Fabrício Rosa</a>
+      <nav class="hidden md:flex space-x-8">
+        <a href="#about" class="hover:highlight-text transition-colors">Sobre</a>
+        <a href="#projects" class="hover:highlight-text transition-colors">Projetos</a>
+        <a href="#blog" class="hover:highlight-text transition-colors">Blog</a>
+        <a href="#testimonials" class="hover:highlight-text transition-colors">Depoimentos</a>
+        <a href="#contact" class="hover:highlight-text transition-colors">Contato</a>
+      </nav>
+      <button id="mobile-menu-btn" class="md:hidden">
+        <i data-lucide="menu" class="h-6 w-6"></i>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden">
+      <nav class="flex flex-col items-center space-y-4 py-4">
+        <a href="#about" class="hover:highlight-text transition-colors">Sobre</a>
+        <a href="#projects" class="hover:highlight-text transition-colors">Projetos</a>
+        <a href="#blog" class="hover:highlight-text transition-colors">Blog</a>
+        <a href="#testimonials" class="hover:highlight-text transition-colors">Depoimentos</a>
+        <a href="#contact" class="hover:highlight-text transition-colors">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-screen flex items-center pt-20">
+      <div class="container mx-auto px-6 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-100 mb-4 fade-in-up">Olá, sou Fabrício 👋</h1>
+        <p class="text-lg md:text-2xl text-gray-300 mb-8 fade-in-up">Desenvolvedor Mobile Nativo & Web Fullstack</p>
+        <a href="#projects" class="btn-primary font-bold py-3 px-8 rounded-full inline-block text-lg fade-in-up">
+          Ver Meus Projetos
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 md:py-32">
+      <div class="container mx-auto px-6">
+        <h2 class="section-title text-3xl font-bold text-center mb-12">Sobre Mim</h2>
+        <div class="grid md:grid-cols-5 gap-12 items-center">
+          <div class="md:col-span-2">
+            <img src="https://placehold.co/500x500/1f2937/34d399?text=FR" alt="Foto de Fabrício Rosa" class="rounded-2xl shadow-2xl w-full mx-auto max-w-sm md:max-w-full">
+          </div>
+          <div class="md:col-span-3 text-lg text-gray-300">
+            <p>Sou um desenvolvedor apaixonado por criar soluções digitais modernas e funcionais. Minha jornada na tecnologia é movida pela curiosidade e pelo desafio de transformar ideias em realidade.</p>
+            <p class="mt-4">Com sólida experiência em desenvolvimento <span class="highlight-text font-semibold">Android nativo com Kotlin e Jetpack Compose</span>, construo aplicativos robustos e com interfaces intuitivas. No backend e frontend, domino o ecossistema <span class="highlight-text font-semibold">Node.js e React</span>, trabalhando com bancos de dados SQL e NoSQL para entregar sistemas web completos e de alta performance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 md:py-32 bg-gray-900">
+      <div class="container mx-auto px-6">
+        <h2 class="section-title text-3xl font-bold text-center mb-12">Projetos em Destaque</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project Card 1 -->
+          <div class="card-bg rounded-2xl p-6 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+            <div class="flex-grow">
+              <h3 class="text-xl font-bold highlight-text mb-2">Simulador Lotofácil</h3>
+              <p class="text-gray-400">App Android em Jetpack Compose com Room, Retrofit e Koin. Gera jogos sem duplicados e integra anúncios com AdMob.</p>
+            </div>
+            <div class="mt-4 flex space-x-4 text-gray-400">
+              <span class="text-xs font-semibold bg-gray-700 px-2 py-1 rounded">Android</span>
+              <span class="text-xs font-semibold bg-gray-700 px-2 py-1 rounded">Kotlin</span>
+              <span class="text-xs font-semibold bg-gray-700 px-2 py-1 rounded">Compose</span>
+            </div>
+          </div>
+          <!-- Project Card 2 -->
+          <div class="card-bg rounded-2xl p-6 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+            <div class="flex-grow">
+              <h3 class="text-xl font-bold highlight-text mb-2">Simulador Lotomania</h3>
+              <p class="text-gray-400">Aplicativo completo para sorteios personalizados. Disponível no Google Play com painel de estatísticas e design moderno.</p>
+            </div>
+            <div class="mt-4 flex space-x-4 text-gray-400">
+              <span class="text-xs font-semibold bg-gray-700 px-2 py-1 rounded">Android</span>
+              <span class="text-xs font-semibold bg-gray-700 px-2 py-1 rounded">Google Play</span>
+            </div>
+          </div>
+          <!-- Project Card 3 -->
+          <div class="card-bg rounded-2xl p-6 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+            <div class="flex-grow">
+              <h3 class="text-xl font-bold highlight-text mb-2">Bot Trader Binance</h3>
+              <p class="text-gray-400">Bot em Python para Binance Testnet com estratégia Pareto 80/20, usando médias móveis, RSI e controle de risco.</p>
+            </div>
+            <div class="mt-4 flex space-x-4 text-gray-400">
+              <span class="text-xs font-semibold bg-gray-700 px-2 py-1 rounded">Python</span>
+              <span class="text-xs font-semibold bg-gray-700 px-2 py-1 rounded">API</span>
+              <span class="text-xs font-semibold bg-gray-700 px-2 py-1 rounded">Trading</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 md:py-32">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-3xl font-bold text-center mb-12">Meu Blog</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                 <!-- Blog Post 1 -->
+                <a href="#" class="card-bg rounded-2xl p-6 block group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-xl font-bold highlight-text mb-2 group-hover:underline">Como criar um app Android com Jetpack Compose</h3>
+                    <p class="text-gray-400">Dicas práticas para desenvolver interfaces modernas e responsivas de forma declarativa e eficiente.</p>
+                </a>
+                 <!-- Blog Post 2 -->
+                <a href="#" class="card-bg rounded-2xl p-6 block group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-xl font-bold highlight-text mb-2 group-hover:underline">Automatizando trades com Python e Binance</h3>
+                    <p class="text-gray-400">Explorando estratégias simples de automação de investimentos e como construir seu primeiro bot de trade.</p>
+                </a>
+                <!-- Blog Post 3 -->
+                <a href="#" class="card-bg rounded-2xl p-6 block group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-xl font-bold highlight-text mb-2 group-hover:underline">Por que usar Koin em seus projetos Kotlin</h3>
+                    <p class="text-gray-400">Benefícios da injeção de dependência para criar apps Android mais testáveis, modulares e escaláveis.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 md:py-32 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-3xl font-bold text-center mb-12">Depoimentos</h2>
+            <div class="relative max-w-3xl mx-auto">
+                <div id="testimonial-container" class="overflow-hidden">
+                    <div id="testimonial-slider" class="flex transition-transform duration-500 ease-in-out">
+                        <!-- Testimonial 1 -->
+                        <div class="min-w-full text-center p-8">
+                            <i data-lucide="quote" class="h-8 w-8 mx-auto highlight-text mb-4"></i>
+                            <p class="text-xl italic text-gray-300">"Trabalhar com Fabrício foi uma experiência incrível! Entregou o projeto antes do prazo e com qualidade excepcional."</p>
+                            <h4 class="font-bold text-lg mt-6 text-gray-100">Cliente A</h4>
+                        </div>
+                        <!-- Testimonial 2 -->
+                        <div class="min-w-full text-center p-8">
+                            <i data-lucide="quote" class="h-8 w-8 mx-auto highlight-text mb-4"></i>
+                            <p class="text-xl italic text-gray-300">"Excelente desenvolvedor, sempre disposto a ajudar e com ótimas soluções para desafios complexos."</p>
+                            <h4 class="font-bold text-lg mt-6 text-gray-100">Cliente B</h4>
+                        </div>
+                        <!-- Testimonial 3 -->
+                        <div class="min-w-full text-center p-8">
+                            <i data-lucide="quote" class="h-8 w-8 mx-auto highlight-text mb-4"></i>
+                            <p class="text-xl italic text-gray-300">"Recomendo fortemente Fabrício para qualquer projeto web ou mobile. Profissionalismo impecável!"</p>
+                            <h4 class="font-bold text-lg mt-6 text-gray-100">Cliente C</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Dots -->
+                <div id="testimonial-dots" class="flex justify-center space-x-2 mt-4"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-32">
+      <div class="container mx-auto px-6 text-center max-w-3xl">
+        <h2 class="section-title text-3xl font-bold mb-4">Vamos Conversar?</h2>
+        <p class="text-lg text-gray-400 mb-8">Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato.</p>
+        <div class="flex justify-center items-center space-x-6">
+            <a href="mailto:fabricxx@gmail.com" class="text-gray-400 hover:highlight-text transition-colors" aria-label="Email">
+                <i data-lucide="mail" class="h-8 w-8"></i>
+            </a>
+            <a href="https://github.com/fabricioxx" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:highlight-text transition-colors" aria-label="GitHub">
+                <i data-lucide="github" class="h-8 w-8"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:highlight-text transition-colors" aria-label="LinkedIn">
+                <i data-lucide="linkedin" class="h-8 w-8"></i>
+            </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 border-t border-gray-800">
+    <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+      <p>&copy; 2025 Fabrício Rosa - Todos os direitos reservados.</p>
+    </div>
+  </footer>
+  
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.addEventListener('click', (e) => {
+        if(e.target.tagName === 'A') {
+            mobileMenu.classList.add('hidden');
+        }
+    });
+
+    // Testimonial Slider
+    const slider = document.getElementById('testimonial-slider');
+    const dotsContainer = document.getElementById('testimonial-dots');
+    const testimonials = slider.children;
+    let currentIndex = 0;
+
+    // Create dots
+    for (let i = 0; i < testimonials.length; i++) {
+        const dot = document.createElement('button');
+        dot.classList.add('w-3', 'h-3', 'rounded-full', 'transition-colors', 'duration-300');
+        dot.classList.add(i === 0 ? 'bg-emerald-400' : 'bg-gray-600');
+        dot.addEventListener('click', () => {
+            goToSlide(i);
+            resetInterval();
+        });
+        dotsContainer.appendChild(dot);
+    }
+    const dots = dotsContainer.children;
+    
+    function goToSlide(index) {
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        dots[currentIndex].classList.remove('bg-emerald-400');
+        dots[currentIndex].classList.add('bg-gray-600');
+        currentIndex = index;
+        dots[currentIndex].classList.add('bg-emerald-400');
+        dots[currentIndex].classList.remove('bg-gray-600');
+    }
+
+    let slideInterval = setInterval(() => {
+        let nextIndex = (currentIndex + 1) % testimonials.length;
+        goToSlide(nextIndex);
+    }, 5000);
+
+    function resetInterval() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(() => {
+            let nextIndex = (currentIndex + 1) % testimonials.length;
+            goToSlide(nextIndex);
+        }, 5000);
+    }
+
+    // Header shadow on scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            header.classList.add('shadow-lg');
+        } else {
+            header.classList.remove('shadow-lg');
+        }
+    });
+
+    // Scroll Animations
+    function reveal() {
+        var reveals = document.querySelectorAll("section");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 150;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("fade-in-up");
+            }
+        }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal(); // Initial check
+  </script>
+</body>
+</html>
