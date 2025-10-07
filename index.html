@@ -1,131 +1,458 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link href='https://fonts.googleapis.com/css2?family=Open+Sans&display=swap' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>Portifolio Fabricio</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio de Fabrício - Desenvolvimento Mobile e Web (Android, APIs REST, SPA)." />
+  <title>Portfólio | Fabrício</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <!-- CSS incorporado -->
+  <style>
+    :root {
+      --color-bg: #020528;
+      --color-bg-alt: #060b3d;
+      --color-gradient-start: #000033;
+      --color-gradient-end: #04154f;
+      --color-primary: #3399ff;
+      --color-primary-accent: #4db2ff;
+      --color-accent: #ffd447;
+      --color-text: #ffffff;
+      --color-text-soft: #d2d7e2;
+      --radius-sm: 4px;
+      --radius-md: 10px;
+      --radius-full: 999px;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,.2);
+      --shadow-md: 0 4px 12px -2px rgba(0,0,0,.4);
+      --shadow-glow: 0 0 0 1px rgba(255,255,255,.05), 0 4px 22px -4px rgba(51,153,255,.55);
+      --max-width: 1180px;
+      --transition: .25s cubic-bezier(.4,.2,.2,1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', system-ui, sans-serif;
+      background: radial-gradient(circle at 20% 20%, var(--color-gradient-start), var(--color-gradient-end) 70%);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--color-accent); text-decoration: none; transition: var(--transition); }
+    a:hover, a:focus { color: var(--color-primary); }
+    a:focus { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+    img { display: block; max-width: 100%; height: auto; }
+    h1,h2,h3,h4 { font-weight: 600; line-height: 1.15; margin: 0 0 .75em; }
+    p { line-height: 1.6; margin: 0 0 1em; }
+
+    /* Layout util */
+    .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 0 4rem; position: relative; }
+    section:nth-of-type(even) { background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0)); }
+    .section-heading { font-size: clamp(1.9rem, 2.6vw, 2.6rem); letter-spacing: .5px; position: relative; }
+    .section-heading span { background: linear-gradient(90deg,var(--color-primary), var(--color-accent)); -webkit-background-clip: text; color: transparent; }
+
+    /* Header */
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(160%) blur(14px); background: rgba(2,5,40,.78); border-bottom: 1px solid rgba(255,255,255,.07); }
+    .nav-bar { display: flex; align-items: center; justify-content: space-between; min-height: 70px; }
+    .brand { font-size: 1.15rem; font-weight: 600; letter-spacing: .5px; display: flex; align-items: center; gap: .6rem; }
+    .brand i { color: var(--color-primary); }
+    nav ul { list-style: none; display: flex; gap: .5rem; padding: 0; margin: 0; }
+    nav a { padding: .65rem 1rem; border-radius: var(--radius-full); font-size: .9rem; font-weight: 600; color: var(--color-text-soft); }
+    nav a:hover, nav a.active { background: rgba(255,255,255,.08); color: var(--color-text); }
+
+    /* Mobile Nav */
+    .nav-toggle { display: none; background: none; border: 0; color: var(--color-text); font-size: 1.6rem; cursor: pointer; padding: .35rem .65rem; border-radius: var(--radius-full); }
+    .nav-toggle:hover { background: rgba(255,255,255,.08); }
+    @media (max-width: 820px) {
+      nav ul { position: absolute; top: 72px; right: 1rem; flex-direction: column; background: rgba(4,8,55,.98); padding: 1rem; border: 1px solid rgba(255,255,255,.07); border-radius: var(--radius-md); width: min(210px, 70vw); box-shadow: var(--shadow-md); opacity: 0; transform: translateY(-8px); pointer-events: none; transition: var(--transition); }
+      nav ul.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+      nav a { display: block; width: 100%; }
+      .nav-toggle { display: inline-flex; }
+    }
+
+    /* Hero / About */
+    #about { padding-top: 6rem; }
+    .about-grid { display: grid; gap: 3rem; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); align-items: center; }
+    .about-photo-wrapper { display: flex; justify-content: center; }
+    .about-photo { width: 220px; aspect-ratio: 1; border-radius: 50%; border: 5px solid var(--color-primary); object-fit: cover; box-shadow: var(--shadow-glow); background: #0b1a4d; }
+    .intro { font-size: 1.05rem; color: var(--color-text-soft); }
+    .social { display: flex; gap: .75rem; margin: 1rem 0 1.5rem; }
+    .social a { width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-full); background: linear-gradient(145deg,#08153c,#041030); position: relative; box-shadow: var(--shadow-sm); color: var(--color-text-soft); }
+    .social a:hover { color: var(--color-text); box-shadow: var(--shadow-glow); transform: translateY(-3px); }
+    .skills { margin-top: 2.2rem; }
+    .skills h3 { margin: 0 0 1rem; font-size: 1.15rem; letter-spacing: .5px; color: var(--color-primary); }
+    .skill-list { list-style: none; display: flex; flex-wrap: wrap; gap: .55rem; padding:0; margin:0; }
+    .skill-list li { background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); padding: .55rem .85rem; font-size: .75rem; letter-spacing: .5px; text-transform: uppercase; border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-full); backdrop-filter: blur(3px); }
+    .skill-list li:hover { border-color: var(--color-primary); }
+
+    /* Projects */
+    #projects { scroll-margin-top: 80px; }
+    .projects-grid { margin-top: 2.5rem; display: grid; gap: 1.8rem; grid-template-columns: repeat(auto-fill,minmax(250px, 1fr)); }
+    .project-card { position: relative; overflow: hidden; background: linear-gradient(160deg,#081238,#041025 60%); border: 1px solid rgba(255,255,255,.07); border-radius: 16px; padding: 1.2rem 1.15rem 1.4rem; display: flex; flex-direction: column; gap: .8rem; box-shadow: var(--shadow-sm); transition: var(--transition); }
+    .project-card:before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 20% 15%, rgba(255,255,255,.12), transparent 55%); opacity:0; transition: var(--transition); }
+    .project-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,.18); box-shadow: var(--shadow-glow); }
+    .project-card:hover:before { opacity:1; }
+    .project-thumb { aspect-ratio: 16/10; width: 100%; object-fit: cover; border-radius: 10px; background: #0c1a40; border: 1px solid rgba(255,255,255,.08); }
+    .project-title { font-size: 1.05rem; margin: .2rem 0 .35rem; letter-spacing: .4px; }
+    .project-desc { font-size: .85rem; color: var(--color-text-soft); margin: 0 0 .6rem; }
+    .project-links { margin-top: auto; display: flex; gap: .65rem; }
+    .btn-icon { position: relative; font-size: .8rem; flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: .4rem; padding: .55rem .7rem; border-radius: var(--radius-sm); background: linear-gradient(135deg, #0c193f, #071330); border: 1px solid rgba(255,255,255,.1); color: var(--color-text-soft); text-transform: uppercase; letter-spacing: .8px; font-weight: 600; transition: var(--transition); }
+    .btn-icon:hover { color: var(--color-text); border-color: var(--color-primary); box-shadow: 0 0 0 1px rgba(51,153,255,.4), 0 4px 18px -4px rgba(51,153,255,.4); }
+
+    /* Contato */
+    #contact { scroll-margin-top: 80px; }
+    .contact-wrapper { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); align-items: start; }
+    .contact-box { background: linear-gradient(145deg,#08153c,#041030); padding: 2rem 2.2rem 2.4rem; border-radius: 18px; border: 1px solid rgba(255,255,255,.08); box-shadow: var(--shadow-sm); position: relative; overflow:hidden; }
+    .contact-box:after { content:""; position:absolute; width: 320px; height: 320px; background: radial-gradient(circle at center, rgba(51,153,255,.18), transparent 70%); top: -90px; right: -120px; opacity:.6; pointer-events:none; }
+    .contact-box h3 { margin-top:0; font-size:1.2rem; letter-spacing:.5px; color: var(--color-primary-accent); }
+    .contact-links { display:flex; flex-direction:column; gap:.85rem; margin:1.2rem 0 1.4rem; }
+    .contact-links a { display:inline-flex; align-items:center; gap:.65rem; font-size:.9rem; padding:.7rem 1rem; background: rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.07); border-radius: var(--radius-sm); color: var(--color-text-soft); }
+    .contact-links a i { width: 18px; text-align:center; }
+    .contact-links a:hover { background: rgba(255,255,255,.1); color: var(--color-text); border-color: var(--color-primary); }
+  /* Novo formulário */
+  .contact-form { background: linear-gradient(150deg,#091b47,#061233); padding: 2rem 2.2rem 2.4rem; border-radius: 18px; border: 1px solid rgba(255,255,255,.08); box-shadow: var(--shadow-sm); position: relative; overflow: hidden; }
+  .contact-form:before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 85% 20%, rgba(51,153,255,.15), transparent 65%); opacity:.6; pointer-events:none; }
+  .contact-form h3 { margin:0 0 1.1rem; font-size:1.15rem; letter-spacing:.5px; color: var(--color-primary-accent); }
+  form#contact-form { display:flex; flex-direction:column; gap:1.05rem; position:relative; }
+  .form-grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); }
+  .form-group { display:flex; flex-direction:column; gap:.45rem; }
+  .form-group label { font-size:.68rem; font-weight:600; letter-spacing:.9px; text-transform:uppercase; color: var(--color-text-soft); }
+  .form-group input, .form-group textarea { background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color: var(--color-text); border-radius: 10px; padding:.85rem .9rem; font: 400 .9rem 'Open Sans', sans-serif; resize: vertical; min-height:52px; transition: var(--transition); }
+  .form-group textarea { min-height: 160px; line-height:1.45; }
+  .form-group input:focus, .form-group textarea:focus { outline:none; border-color: var(--color-primary); box-shadow: 0 0 0 1px rgba(51,153,255,.4), 0 0 0 4px rgba(51,153,255,.15); }
+  .form-row-full { grid-column: 1 / -1; }
+  .honeypot { display:none !important; }
+  .btn-submit { align-self:flex-start; background: linear-gradient(135deg,#0c193f,#082259); border:1px solid rgba(255,255,255,.14); color: var(--color-text); padding:.85rem 1.4rem; font-size:.75rem; text-transform:uppercase; letter-spacing:1.2px; font-weight:700; border-radius: var(--radius-full); cursor:pointer; display:inline-flex; align-items:center; gap:.55rem; position:relative; overflow:hidden; transition: var(--transition); }
+  .btn-submit:before { content:""; position:absolute; inset:0; background: linear-gradient(90deg, rgba(255,255,255,.16), transparent 70%); opacity:0; transition: var(--transition); }
+  .btn-submit:hover { border-color: var(--color-primary); box-shadow: 0 0 0 1px rgba(51,153,255,.4), 0 6px 22px -6px rgba(51,153,255,.6); transform: translateY(-2px); }
+  .btn-submit:hover:before { opacity:1; }
+  .btn-submit:disabled { opacity:.55; cursor:not-allowed; transform:none; box-shadow:none; }
+  .form-status { font-size:.7rem; letter-spacing:.6px; margin-top:.4rem; min-height: 20px; font-weight:600; }
+  .form-status.success { color:#5ce0a5; }
+  .form-status.error { color:#ff7272; }
+  .required-hint { font-size:.55rem; opacity:.6; letter-spacing:.5px; margin-left:.25rem; }
+  @media (max-width:620px){ .contact-form { padding: 1.6rem 1.4rem 2rem; } }
+
+    /* Footer */
+    footer { margin-top: 3rem; background: #030a25; border-top: 1px solid rgba(255,255,255,.07); padding: 2.5rem 0 2.2rem; position: relative; overflow:hidden; }
+    footer:before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 85% 30%, rgba(51,153,255,.18), transparent 60%); opacity:.4; }
+    .footer-inner { position:relative; display:flex; flex-direction:column; gap:1.2rem; align-items:center; text-align:center; }
+    .footer-links { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+    .footer-links a { font-size:.8rem; font-weight:600; letter-spacing:.5px; padding:.55rem .9rem; color: var(--color-text-soft); background: rgba(255,255,255,.05); border-radius: var(--radius-full); }
+    .footer-links a:hover { background: rgba(255,255,255,.12); color: var(--color-text); }
+    .copyright { font-size:.7rem; letter-spacing:.6px; color: #9ca7c3; }
+
+    /* Scrollbar (WebKit) */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #060b3d; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(var(--color-primary),#1d71b8); border-radius: 8px; }
+
+    /* Acessibilidade extra */
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); border:0; white-space:nowrap; }
+    :target { scroll-margin-top: 90px; }
+
+    /* Lazy images */
+    .blur-up { filter: blur(18px); transform: scale(1.02); transition: filter 0.8s ease, transform 0.8s ease; }
+    .blur-up.lazy-loaded { filter: blur(0); transform: scale(1); }
+    .progressive-img { background: #0c1a40; position: relative; }
+    .progressive-img::after { content:""; position:absolute; inset:0; background: linear-gradient(145deg,rgba(255,255,255,.05),transparent 65%); opacity:0; transition:.6s ease; pointer-events:none; }
+    .progressive-img.loaded::after { opacity:1; }
+  </style>
 </head>
 <body>
   <header>
-    <nav>
-      <ul>
-        <li><a href="#about">Sobre</a></li>
-        <li><a href="#projects">Projetos</a></li>
-        <li><a href="#contact">Contato</a></li>
-      </ul>
-    </nav>
+    <div class="container nav-bar">
+      <div class="brand" aria-label="Identidade do site">
+        <i class="fas fa-code"></i> <span>Fabrício Dev</span>
+      </div>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Alternar menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav>
+        <ul id="primary-navigation">
+          <li><a href="#about" class="active">Sobre</a></li>
+            <li><a href="#projects">Projetos</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="about">
-      <div class="about-container">
-        
-        <div class="about-text">
-          <img src="img/rabit.png" class="about-image" alt="Minha Foto">
-          <p>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          </p>
-          <p>Meu nome é Fabrício e sou um programador mobile e web. Tenho experiência em desenvolvimento de aplicativos para Android e também em criação de aplicações web com SPA e Web APIs Rest. Tenho projetos de APIs e de aplicações SPA no GitHub.</p>
-          <h3>Habilidades</h3>
-          <ul>
-            <li>Kotlin</li>
-            <li>Java</li>
-            <li>C#</li>
-            <li>TypeScript</li>
-            <li>Angular</li>
-            <li>Spring Boot</li>
-            <li>ASP.NET</li>
-            <li>JPA</li>
-            <li>Hibernate</li>
-            <li>Entities Framework</li>
-            <li>Banco de Dados: MySQL, PostgreSQL, SQLite</li>
-          </ul>
+    <!-- SOBRE -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <h2 id="about-heading" class="section-heading"><span>Sobre</span> mim</h2>
+        <div class="about-grid">
+          <div class="about-photo-wrapper">
+            <!-- Imagem de perfil responsiva (substitua por versões reais: 320, 480, 640, 800) -->
+            <img 
+              src="https://placehold.co/40x40/0b1a4d/ffffff?text=F" 
+              data-src="https://placehold.co/400x400/0b1a4d/ffffff?text=Fabr%C3%ADcio" 
+              data-srcset="https://placehold.co/320x320/0b1a4d/ffffff?text=F 320w, https://placehold.co/400x400/0b1a4d/ffffff?text=Fabr%C3%ADcio 400w, https://placehold.co/600x600/0b1a4d/ffffff?text=Fabr%C3%ADcio 600w, https://placehold.co/800x800/0b1a4d/ffffff?text=Fabr%C3%ADcio 800w" 
+              sizes="(max-width: 520px) 220px, 220px" 
+              alt="Foto de perfil de Fabrício" 
+              class="about-photo blur-up progressive-img" 
+              loading="lazy" 
+              decoding="async" />
+          </div>
+          <div>
+            <p class="intro">Sou Fabrício, estudante de Ciência da Computação e desenvolvedor mobile nativo e web fullstack. Tenho foco em aplicativos Android utilizando Kotlin e Jetpack Compose, além de atuar no ecossistema JavaScript/Node.js desenvolvendo APIs, trabalhando com Docker e explorando a criação de bots com inteligência artificial.</p>
+            <p class="intro">Tenho experiência com integrações, automações e criação de conteúdo para redes sociais, com destaque para plataformas como o Facebook. Atualmente, estou aprofundando estudos sobre aplicação de IA no ciclo de desenvolvimento para acelerar processos — inclusive este site foi criado com apoio de ferramentas de inteligência artificial.</p>
+            <p class="intro">Meu objetivo é unir criatividade e inovação para transformar ideias em soluções digitais práticas, escaláveis e de impacto.</p>
+            <div class="social" aria-label="Redes sociais">
+              <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <div class="skills">
+              <h3>Habilidades</h3>
+              <ul class="skill-list" aria-label="Lista de habilidades">
+                <li>Kotlin</li>
+                <li>Jetpack Compose</li>
+                <li>JavaScript</li>
+                <li>Node.js</li>
+                <li>Next.js</li>
+                <li>React</li>
+                <li>Java</li>
+                <li>C#</li>
+                <li>Python</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-
-    <section id="projects">
-      <div class="project-container">
-        <div class="project-box">
-          <img src="img/rabit.png" alt="Projeto 1">
-          <h3>Projeto 1</h3>
-          <p>Breve descrição sobre o projeto 1</p>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-android"></i></a>
-        </div>
-        <div class="project-box">
-          <img src="img/rabit.png" alt="Projeto 2">
-          <h3>Projeto 2</h3>
-          <p>Breve descrição sobre o projeto 2</p>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-android"></i></a>
-        </div>
-        <div class="project-box">
-          <img src="img/rabit.png" alt="Projeto 3">
-          <h3>Projeto 3</h3>
-          <p>Breve descrição sobre o projeto 3</p>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-android"></i></a>
-        </div>
-        <div class="project-box">
-          <img src="img/rabit.png" alt="Projeto 4">
-          <h3>Projeto 4</h3>
-          <p>Breve descrição sobre o projeto 4</p>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-android"></i></a>
-        </div>
-        <div class="project-box">
-          <img src="img/rabit.png" alt="Projeto 4">
-          <h3>Projeto 5</h3>
-          <p>Breve descrição sobre o projeto 4</p>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-android"></i></a>
-        </div>
-        <div class="project-box">
-          <img src="img/rabit.png" alt="Projeto 4">
-          <h3>Projeto 6</h3>
-          <p>Breve descrição sobre o projeto 4</p>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-android"></i></a>
+    <!-- PROJETOS -->
+    <section id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <h2 id="projects-heading" class="section-heading"><span>Projetos</span> em destaque</h2>
+        <div class="projects-grid">
+          <!-- Card modelo; substitua thumbs/links conforme necessidade -->
+          <article class="project-card" aria-label="Projeto 1">
+            <img 
+              src="https://placehold.co/32x20/081238/ffffff?text=1" 
+              data-src="https://placehold.co/640x400/081238/ffffff?text=Projeto+1" 
+              data-srcset="https://placehold.co/320x200/081238/ffffff?text=Projeto+1 320w, https://placehold.co/480x300/081238/ffffff?text=Projeto+1 480w, https://placehold.co/640x400/081238/ffffff?text=Projeto+1 640w, https://placehold.co/800x500/081238/ffffff?text=Projeto+1 800w" 
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px" 
+              alt="Miniatura Projeto 1" class="project-thumb blur-up progressive-img" loading="lazy" decoding="async" />
+            <h3 class="project-title">Projeto 1</h3>
+            <p class="project-desc">Breve descrição sobre o projeto 1 destacando objetivo e stack principal.</p>
+            <div class="project-links">
+              <a class="btn-icon" href="#" aria-label="Repositório GitHub Projeto 1"><i class="fab fa-github"></i> Código</a>
+              <a class="btn-icon" href="#" aria-label="Build Android Projeto 1"><i class="fab fa-android"></i> App</a>
+            </div>
+          </article>
+          <article class="project-card" aria-label="Projeto 2">
+            <img src="https://placehold.co/32x20/081238/ffffff?text=2" data-src="https://placehold.co/640x400/081238/ffffff?text=Projeto+2" data-srcset="https://placehold.co/320x200/081238/ffffff?text=Projeto+2 320w, https://placehold.co/480x300/081238/ffffff?text=Projeto+2 480w, https://placehold.co/640x400/081238/ffffff?text=Projeto+2 640w, https://placehold.co/800x500/081238/ffffff?text=Projeto+2 800w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px" alt="Miniatura Projeto 2" class="project-thumb blur-up progressive-img" loading="lazy" decoding="async" />
+            <h3 class="project-title">Projeto 2</h3>
+            <p class="project-desc">Descrição curta indicando diferencial técnico ou funcional.</p>
+            <div class="project-links">
+              <a class="btn-icon" href="#"><i class="fab fa-github"></i> Código</a>
+              <a class="btn-icon" href="#"><i class="fab fa-android"></i> App</a>
+            </div>
+          </article>
+          <article class="project-card" aria-label="Projeto 3">
+            <img src="https://placehold.co/32x20/081238/ffffff?text=3" data-src="https://placehold.co/640x400/081238/ffffff?text=Projeto+3" data-srcset="https://placehold.co/320x200/081238/ffffff?text=Projeto+3 320w, https://placehold.co/480x300/081238/ffffff?text=Projeto+3 480w, https://placehold.co/640x400/081238/ffffff?text=Projeto+3 640w, https://placehold.co/800x500/081238/ffffff?text=Projeto+3 800w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px" alt="Miniatura Projeto 3" class="project-thumb blur-up progressive-img" loading="lazy" decoding="async" />
+            <h3 class="project-title">Projeto 3</h3>
+            <p class="project-desc">Alguma frase sobre impacto ou performance alcançada.</p>
+            <div class="project-links">
+              <a class="btn-icon" href="#"><i class="fab fa-github"></i> Código</a>
+              <a class="btn-icon" href="#"><i class="fab fa-android"></i> App</a>
+            </div>
+          </article>
+          <article class="project-card" aria-label="Projeto 4">
+            <img src="https://placehold.co/32x20/081238/ffffff?text=4" data-src="https://placehold.co/640x400/081238/ffffff?text=Projeto+4" data-srcset="https://placehold.co/320x200/081238/ffffff?text=Projeto+4 320w, https://placehold.co/480x300/081238/ffffff?text=Projeto+4 480w, https://placehold.co/640x400/081238/ffffff?text=Projeto+4 640w, https://placehold.co/800x500/081238/ffffff?text=Projeto+4 800w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px" alt="Miniatura Projeto 4" class="project-thumb blur-up progressive-img" loading="lazy" decoding="async" />
+            <h3 class="project-title">Projeto 4</h3>
+            <p class="project-desc">Tecnologias e resultado principal do projeto.</p>
+            <div class="project-links">
+              <a class="btn-icon" href="#"><i class="fab fa-github"></i> Código</a>
+              <a class="btn-icon" href="#"><i class="fab fa-android"></i> App</a>
+            </div>
+          </article>
+          <article class="project-card" aria-label="Projeto 5">
+            <img src="https://placehold.co/32x20/081238/ffffff?text=5" data-src="https://placehold.co/640x400/081238/ffffff?text=Projeto+5" data-srcset="https://placehold.co/320x200/081238/ffffff?text=Projeto+5 320w, https://placehold.co/480x300/081238/ffffff?text=Projeto+5 480w, https://placehold.co/640x400/081238/ffffff?text=Projeto+5 640w, https://placehold.co/800x500/081238/ffffff?text=Projeto+5 800w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px" alt="Miniatura Projeto 5" class="project-thumb blur-up progressive-img" loading="lazy" decoding="async" />
+            <h3 class="project-title">Projeto 5</h3>
+            <p class="project-desc">Resumo rápido com foco em escalabilidade ou integração.</p>
+            <div class="project-links">
+              <a class="btn-icon" href="#"><i class="fab fa-github"></i> Código</a>
+              <a class="btn-icon" href="#"><i class="fab fa-android"></i> App</a>
+            </div>
+          </article>
+          <article class="project-card" aria-label="Projeto 6">
+            <img src="https://placehold.co/32x20/081238/ffffff?text=6" data-src="https://placehold.co/640x400/081238/ffffff?text=Projeto+6" data-srcset="https://placehold.co/320x200/081238/ffffff?text=Projeto+6 320w, https://placehold.co/480x300/081238/ffffff?text=Projeto+6 480w, https://placehold.co/640x400/081238/ffffff?text=Projeto+6 640w, https://placehold.co/800x500/081238/ffffff?text=Projeto+6 800w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px" alt="Miniatura Projeto 6" class="project-thumb blur-up progressive-img" loading="lazy" decoding="async" />
+            <h3 class="project-title">Projeto 6</h3>
+            <p class="project-desc">Pequena descrição do problema resolvido ou valor entregue.</p>
+            <div class="project-links">
+              <a class="btn-icon" href="#"><i class="fab fa-github"></i> Código</a>
+              <a class="btn-icon" href="#"><i class="fab fa-android"></i> App</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
-    
 
-    <section id="contact">
-      
-        
-        <div class="contact-info">
-          <h2>Contato</h2>
-          <a href="https://api.whatsapp.com/send?phone=+1234567890"><i class="fab fa-whatsapp"></i> +1234567890</a>
-          <a href="mailto:youremail@email.com"><i class="fa fa-envelope"></i> youremail@email.com</a>
-        
-          <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAT1m3sBUOVAxUkswRk5ZOFpYMkMwVlhCTkdINVBNWS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; width:200%; height: 480px;"></iframe>
+    <!-- CONTATO -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 id="contact-heading" class="section-heading"><span>Contato</span> e formulário</h2>
+        <div class="contact-wrapper">
+          <div class="contact-box" aria-label="Informações de contato">
+            <h3>Fale comigo</h3>
+            <p>Aberto a oportunidades freelance, full-time ou colaboração em projetos open source.</p>
+            <div class="contact-links">
+              <a href="https://api.whatsapp.com/send?phone=+1234567890" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> +1234567890</a>
+              <a href="mailto:youremail@email.com" aria-label="E-mail"><i class="fas fa-envelope"></i> youremail@email.com</a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i> linkedin.com/in/seu-perfil</a>
+              <a href="#" aria-label="GitHub"><i class="fab fa-github"></i> github.com/seuusuario</a>
+            </div>
+            <p style="font-size:.78rem; color:var(--color-text-soft); margin:0;">Retorno geralmente em até 24h.</p>
+          </div>
+          <div class="contact-form" aria-label="Formulário de contato interno">
+            <h3>Envie uma mensagem</h3>
+            <form id="contact-form" action="https://formspree.io/f/SEU_ID" method="POST" novalidate>
+              <div class="honeypot">
+                <label>Não preencher: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">Nome <span class="required-hint">(obrigatório)</span></label>
+                  <input type="text" id="name" name="name" required placeholder="Seu nome" autocomplete="name" />
+                </div>
+                <div class="form-group">
+                  <label for="email">E-mail <span class="required-hint">(obrigatório)</span></label>
+                  <input type="email" id="email" name="email" required placeholder="voce@exemplo.com" autocomplete="email" />
+                </div>
+                <div class="form-group form-row-full">
+                  <label for="subject">Assunto <span class="required-hint">(obrigatório)</span></label>
+                  <input type="text" id="subject" name="subject" required placeholder="Assunto da mensagem" />
+                </div>
+                <div class="form-group form-row-full">
+                  <label for="message">Mensagem <span class="required-hint">(obrigatório)</span></label>
+                  <textarea id="message" name="message" required placeholder="Como posso ajudar? Descreva sua necessidade..."></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn-submit">
+                <span class="btn-text">Enviar</span>
+                <i class="fas fa-paper-plane"></i>
+              </button>
+              <div class="form-status" id="form-status" aria-live="polite"></div>
+            </form>
+          </div>
         </div>
-      
-    </section>
-    </main>
-
-
-    <footer>
-      <div class="footer-container">
-        <div class="footer-links">
-          <a href="#">Sobre</a>
-          <a href="#">Projetos</a>
-          <a href="#">Contato</a>
-        </div>
-      <p>Copyright © 2021 - Fabrício</p>
       </div>
-    </footer>
-  
-    <script src="javascript/script.js"></script>
-  </body>
-  
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <nav class="footer-links" aria-label="Links de rodapé">
+        <a href="#about">Sobre</a>
+        <a href="#projects">Projetos</a>
+        <a href="#contact">Contato</a>
+      </nav>
+      <div class="copyright">© <span id="year"></span> Fabrício. Todos os direitos reservados.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Atualiza ano automaticamente
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menu mobile
+    const toggle = document.querySelector('.nav-toggle');
+    const navList = document.getElementById('primary-navigation');
+    toggle.addEventListener('click', () => {
+      const open = navList.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+      toggle.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+
+    // Destacar link ativo conforme scroll
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('nav a');
+    const activateLink = () => {
+      let current = '';
+      const offset = window.scrollY + 140; // compensar header
+      sections.forEach(sec => { if (offset >= sec.offsetTop && offset < sec.offsetTop + sec.offsetHeight) current = sec.id; });
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+    };
+    window.addEventListener('scroll', activateLink);
+    activateLink();
+
+    // Suave fechar menu ao clicar em link (mobile)
+    navLinks.forEach(a => a.addEventListener('click', () => { if (navList.classList.contains('open')) toggle.click(); }));
+
+    // Formulário (Formspree) - envio assíncrono
+    const contactForm = document.getElementById('contact-form');
+    const statusBox = document.getElementById('form-status');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        statusBox.textContent = '';
+        statusBox.className = 'form-status';
+        const btn = contactForm.querySelector('.btn-submit');
+        const btnText = btn.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+        btn.disabled = true;
+        btnText.textContent = 'Enviando...';
+        try {
+          // Validação simples
+          const requiredFields = ['name','email','subject','message'];
+          for (const f of requiredFields) {
+            const el = contactForm.elements[f];
+            if (!el || !el.value.trim()) { throw new Error('Preencha todos os campos obrigatórios.'); }
+          }
+          const data = new FormData(contactForm);
+          const res = await fetch(contactForm.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            contactForm.reset();
+            statusBox.textContent = 'Mensagem enviada com sucesso!';
+            statusBox.classList.add('success');
+          } else {
+            const result = await res.json().catch(()=>({}));
+            const msg = result.errors ? result.errors.map(e=>e.message).join(', ') : 'Erro ao enviar. Tente novamente mais tarde.';
+            throw new Error(msg);
+          }
+        } catch (err) {
+          statusBox.textContent = err.message || 'Erro inesperado.';
+          statusBox.classList.add('error');
+        } finally {
+          btn.disabled = false;
+          btnText.textContent = originalText;
+        }
+      });
+    }
+
+    // Progressive / lazy upgrade para imagens (substitui mini placeholder por versão final ao entrar no viewport)
+    const progressiveImgs = document.querySelectorAll('img[data-src]');
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+            if (img.dataset.src) img.src = img.dataset.src;
+            if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+            img.addEventListener('load', () => {
+              img.classList.add('lazy-loaded');
+              img.closest('.progressive-img')?.classList.add('loaded');
+            }, { once: true });
+          obs.unobserve(img);
+        }
+      });
+    }, { rootMargin: '120px 0px 120px 0px', threshold: 0.01 }) : null;
+
+    if (io) progressiveImgs.forEach(img => io.observe(img));
+    else { // fallback sem IntersectionObserver
+      progressiveImgs.forEach(img => { img.src = img.dataset.src; if (img.dataset.srcset) img.srcset = img.dataset.srcset; });
+    }
+  </script>
+</body>
 </html>
